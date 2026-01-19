@@ -36,8 +36,9 @@ Interactive PRD creation with the user. Use when no prd.json exists or user asks
    - Any browser verification needed?
 
 4. **Generate artifacts** — Only after user confirms scope:
-   - Wipe `docs/autonomous/` if it exists
-   - Create prd.json, progress.txt, prompt.md
+   - Create `docs/autonomous/<branch-name>/` directory
+   - Wipe contents if it exists (fresh start)
+   - Create prd.json, progress.txt, prompt.md in that folder
 
 5. **User approves** — Show generated prd.json, get explicit approval before execution
 
@@ -46,9 +47,9 @@ Autonomous story completion with handoffs. Use when prd.json exists and user ask
 
 ## Artifacts
 
-All artifacts live in `docs/autonomous/`:
+All artifacts live in `docs/autonomous/<branch-name>/`:
 
-### docs/autonomous/prd.json
+### docs/autonomous/<branch-name>/prd.json
 
 ```json
 {
@@ -72,7 +73,7 @@ All artifacts live in `docs/autonomous/`:
 }
 ```
 
-### docs/autonomous/progress.txt
+### docs/autonomous/<branch-name>/progress.txt
 
 ```markdown
 # Progress Log
@@ -92,7 +93,7 @@ max_iterations: 15
 (Entries appended below as iterations complete)
 ```
 
-### docs/autonomous/prompt.md
+### docs/autonomous/<branch-name>/prompt.md
 
 Contains execution instructions for each iteration. Template provided below.
 
@@ -133,7 +134,7 @@ APPEND to progress.txt (never replace existing content):
 
 When handing off, use this goal:
 ```
-Execute Ralph Mode for <feature>. Read docs/autonomous/prompt.md for instructions.
+Execute Ralph Mode for <feature>. Read docs/autonomous/<branch-name>/prompt.md for instructions.
 ```
 
 ## Completion Signals
@@ -207,7 +208,7 @@ Only add general patterns, not story-specific details.
 
 ## prompt.md Template
 
-Create this file at docs/autonomous/prompt.md:
+Create this file at docs/autonomous/<branch-name>/prompt.md:
 
 ```markdown
 # Ralph Mode: <Feature Name>
@@ -236,7 +237,7 @@ You are executing Ralph Mode via Amp handoffs. Follow these rules strictly.
 
 When handing off, use this goal:
 ```
-Execute Ralph Mode for <feature>. Read docs/autonomous/prompt.md for instructions.
+Execute Ralph Mode for <feature>. Read docs/autonomous/<branch-name>/prompt.md for instructions.
 ```
 
 ## Progress Report Format

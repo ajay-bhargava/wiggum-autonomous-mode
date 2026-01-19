@@ -60,8 +60,9 @@ Interactive PRD creation with the user. Use when no prd.json exists or user asks
 
 4. **Generate artifacts** — Only after user confirms scope:
    - Create worktree if needed
-   - Wipe `docs/autonomous/` in worktree if it exists
-   - Create prd.json, progress.txt, prompt.md
+   - Create `docs/autonomous/<branch-name>/` in worktree
+   - Wipe contents if it exists (fresh start)
+   - Create prd.json, progress.txt, prompt.md in that folder
 
 5. **User approves** — Show generated prd.json, get explicit approval before execution
 
@@ -70,9 +71,9 @@ Autonomous story completion with handoffs in the worktree. Use when prd.json exi
 
 ## Artifacts
 
-All artifacts live in `<worktree>/docs/autonomous/`:
+All artifacts live in `<worktree>/docs/autonomous/<branch-name>/`:
 
-### docs/autonomous/prd.json
+### docs/autonomous/<branch-name>/prd.json
 
 ```json
 {
@@ -97,13 +98,13 @@ All artifacts live in `<worktree>/docs/autonomous/`:
 }
 ```
 
-### docs/autonomous/progress.txt
+### docs/autonomous/<branch-name>/progress.txt
 
 ```markdown
 # Progress Log
 
 ## Worktree Info
-worktree_path: ../project-name-worktrees/feature-name
+worktree_path: ../project-name-worktrees/<branch-name>
 main_repo: /path/to/main/repo
 
 ## Iteration Counter
@@ -121,7 +122,7 @@ max_iterations: 15
 (Entries appended below as iterations complete)
 ```
 
-### docs/autonomous/prompt.md
+### docs/autonomous/<branch-name>/prompt.md
 
 Contains execution instructions for each iteration. Template provided below.
 
@@ -163,7 +164,7 @@ APPEND to progress.txt (never replace existing content):
 
 When handing off, use this goal:
 ```
-Execute Ralph Mode (worktree) for <feature>. Worktree: <worktreePath>. Read docs/autonomous/prompt.md for instructions.
+Execute Ralph Mode (worktree) for <feature>. Worktree: <worktreePath>. Read docs/autonomous/<branch-name>/prompt.md for instructions.
 ```
 
 ## Completion Signals
@@ -249,7 +250,7 @@ Only add general patterns, not story-specific details.
 
 ## prompt.md Template
 
-Create this file at `<worktree>/docs/autonomous/prompt.md`:
+Create this file at `<worktree>/docs/autonomous/<branch-name>/prompt.md`:
 
 ```markdown
 # Ralph Mode (Worktree): <Feature Name>
@@ -282,7 +283,7 @@ You are executing Ralph Mode via Amp handoffs in a git worktree.
 
 When handing off, use this goal:
 ```
-Execute Ralph Mode (worktree) for <feature>. Worktree: <worktreePath>. Read docs/autonomous/prompt.md for instructions.
+Execute Ralph Mode (worktree) for <feature>. Worktree: <worktreePath>. Read docs/autonomous/<branch-name>/prompt.md for instructions.
 ```
 
 ## Stop Conditions
