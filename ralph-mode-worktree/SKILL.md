@@ -38,33 +38,85 @@ Convention: worktrees live in `../<project>-worktrees/<branch-name>/` relative t
 ## Modes
 
 ### Planning Mode
-Interactive PRD creation with the user. Use when no prd.json exists or user asks to plan.
+Interactive PRD creation with the user via **two-phase turn-by-turn Q&A**. Use when no prd.json exists or user asks to plan.
 
-**Turn-by-turn Q&A process:**
+---
 
-1. **Understand the feature** — Ask clarifying questions:
-   - What problem does this solve?
-   - Who is the user?
-   - What are the key workflows?
-   - Any technical constraints or preferences?
-   - What does "done" look like?
+## Phase 1: Product Design Q&A
 
-2. **Scope the work** — Break into small stories, ask:
-   - Does this ordering make sense?
-   - Any dependencies I'm missing?
-   - Should any stories be split further?
+Ask numbered questions ONE AT A TIME. Wait for user response before asking the next question.
 
-3. **Define acceptance criteria** — For each story, confirm:
-   - What commands verify success? (typecheck, tests, etc.)
-   - Any browser verification needed?
+**Q1: Problem & User**
+- What problem does this solve?
+- Who is the primary user?
 
-4. **Generate artifacts** — Only after user confirms scope:
+**Q2: Key Workflows**
+- What are the main workflows/use cases?
+- Walk me through the happy path.
+
+**Q3: Scope Boundaries**
+- What is explicitly OUT of scope?
+- Any edge cases to handle vs. ignore?
+
+**Q4: Success Criteria**
+- What does "done" look like from a user perspective?
+- How will we know it's working?
+
+**Q5: Constraints**
+- Any business/timeline/resource constraints?
+- Dependencies on external systems or teams?
+
+After Q5, summarize your understanding and confirm before moving to Phase 2.
+
+---
+
+## Phase 2: Engineering Design Q&A
+
+Continue numbered questions. Drill into technical specifics.
+
+**Q6: Architecture Approach**
+- Should this be a new module/file or extend existing?
+- Any patterns from the codebase to follow?
+
+**Q7: Data & API Design**
+- What data structures/schemas are needed?
+- API endpoint design (if applicable)?
+
+**Q8: Multi-step Logic**
+- If there are multiple stages, what's the flow?
+- Should stages be separate endpoints or combined?
+
+**Q9: Calculation/Logic Details**
+- For any complex logic, confirm the algorithm/approach
+- Units, formats, edge case handling?
+
+**Q10: Error Handling**
+- What happens when X fails?
+- Return null, throw error, or fallback behavior?
+
+**Q11: File/Naming Conventions**
+- Where should new files live?
+- Naming conventions to follow?
+
+**Q12: Testing Strategy**
+- What commands verify success?
+- Any browser/manual verification needed?
+
+After Phase 2, confirm the technical approach before generating artifacts.
+
+---
+
+## Artifact Generation
+
+Only after BOTH phases complete and user confirms:
+
+1. **Generate artifacts**:
    - Create worktree if needed
    - Create `docs/autonomous/<branch-name>/` in worktree
    - Wipe contents if it exists (fresh start)
    - Create prd.json, progress.txt, prompt.md in that folder
 
-5. **User approves** — Show generated prd.json, get explicit approval before execution
+2. **User approves** — Show generated prd.json, get explicit approval before execution
 
 ### Execution Mode
 Autonomous story completion with handoffs in the worktree. Use when prd.json exists.
